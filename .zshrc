@@ -1,6 +1,7 @@
 # aliases
 alias ls="ls -la"
 alias sl="ls -la"
+alias vi="vim"
 
 # homebrew
 export PATH=/opt/homebrew/bin:$PATH

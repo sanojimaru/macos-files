@@ -3,21 +3,7 @@ alias ls="ls -la"
 alias sl="ls -la"
 alias vi="vim"
 
-# homebrew
-export PATH=/opt/homebrew/bin:$PATH
-eval "$(brew shellenv)"
-
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
-
-# zsh
-# zsh-completions
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  autoload -Uz compinit
-  compinit
-fi
+# zsh configration
 
 # 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
 setopt auto_cd
@@ -44,7 +30,7 @@ function cdup() {
   zle reset-prompt
 }
 zle -N cdup
-bindkey '^^' cdup
+bindkey '^' cdup
 
 # URLをコピペしたときに自動でエスケープ
 autoload -Uz url-quote-magic
@@ -55,4 +41,27 @@ setopt RM_STAR_SILENT
 
 # curlで?や&をエスケープ無しで使える
 setopt nonomatch
+
+# zsh-completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  autoload -Uz compinit
+  compinit
+fi
+
+# homebrew
+export PATH=/opt/homebrew/bin:$PATH
+eval "$(brew shellenv)"
+
+# pkg-config
+export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig"
+
+# icu
+export LDFLAGS="-L/opt/homebrew/opt/icu4c@76/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/icu4c@76/include"
+
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
 
